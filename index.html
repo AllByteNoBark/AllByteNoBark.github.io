@@ -1,0 +1,75 @@
+<body>
+    <script src="js/engine/engine.js"></script>
+    <script src="js/engine/wrappers.js"></script>
+    <script src="js/ui/platform.js"></script>
+    <script src="js/ui/textBox.js"></script>
+    <script src="js/ui/player.js"></script>
+    <script src="js/ui/character.js"></script>
+    <script src="js/ui/background.js"></script>
+    <script>
+        gameTitle('BusBus')
+        const player = new Player("Sussingrad");
+
+        const char = new Character("Gustavo");
+        const gamer = new Character("CiccioGamer89");
+        
+        label('gusgus', function() {
+            bg('./assets/img/bg1.jpg');
+            
+            print("hi");
+            char.say("hi");
+
+            goto('label');
+        })
+
+        label('label', function() {
+            bg('./assets/img/bg2.jpg');
+
+            print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            char.say('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
+            player.makeChoice("aaaaaaaaaa or bbbbbbbbbb?", ['aaaaaaaaaa', 'test'], ['bbbbbbbbbb', 'gusgus'])
+        })
+
+        label('test', function() {
+            bg('./assets/img/bg3.jpg')
+
+            print('that is suspicious')
+            char.say("that is suspicious")
+            
+            goto('a')
+        })
+
+        label('a', function() {
+            bg('./assets/img/bg4.jpg')
+
+            print('gus is sus')
+            gamer.say("gus is sus")
+            
+            player.makeChoice("1 or 2?", ['1', 'b'], ['2', 'test'])
+        })
+
+        label('b', function() {
+            bg('./assets/img/bg5.jpg')
+
+            print('gus is not sus')
+            char.say("i am not sus")
+            
+            player.makeChoice("yes or no?", ['yes', 'paradise'], ['no', 'hell'])
+        })
+
+        label('paradise', function() {
+            bg('./assets/img/bg6.gif');
+
+            print('gustavo is happy to hear that', './assets/sound/sound1.mp3')
+            char.say('thanks, i like yo cut G');
+        })
+
+        label('hell', function() {
+            bg('./assets/img/bg7.gif');
+
+            print('gustavo was indeed the sus gus', './assets/sound/sound3.mp3')
+            char.say('I AM RED', './assets/sound/sound2.mp3');
+        })
+    </script>
+</body>
