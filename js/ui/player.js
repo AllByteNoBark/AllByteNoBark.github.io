@@ -23,6 +23,11 @@ function _newChoices(choice1, choice2) {
 class Player {
     constructor(name){
         this.name = name;
+        this.character = new Character(name);
+    }
+
+    say(phrase, link = false) {
+        this.character.say(phrase, link);
     }
 
     makeChoice(choice, option1, option2) {

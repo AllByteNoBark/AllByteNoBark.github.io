@@ -7,69 +7,50 @@
     <script src="js/ui/character.js"></script>
     <script src="js/ui/background.js"></script>
     <script>
-        gameTitle('BusBus')
-        const player = new Player("Sussingrad");
+        gameTitle('Creepy Visit')
 
-        const char = new Character("Gustavo");
-        const gamer = new Character("CiccioGamer89");
+        const player = new Player("Protagonist");
+        const villain = new Character("Mysterious Figure");
         
-        label('gusgus', function() {
-            bg('./assets/img/bg1.jpg');
+        label('start', function() {
+            bg('./assets/img/0.jpg');
             
-            print("hi");
-            char.say("hi");
+            print("...", "./assets/sound/a0.mp3");
+            player.say("It's very quiet today.", "./assets/sound/a0.mp3");
+            player.say("I can only hear the sound of rain. It's almost too relaxing.", "./assets/sound/a0.mp3")
 
-            goto('label');
+            goto('appearance');
         })
 
-        label('label', function() {
-            bg('./assets/img/bg2.jpg');
+        label('appearance', function() {
+            bg('./assets/img/1.jpg');
 
-            print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            char.say('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            print("...", "./assets/sound/a1.mp3")
+            print("What, or who, is that?", "./assets/sound/a1.mp3");
+            villain.say('Finally, I have found you.', "./assets/sound/a1.mp3")
 
-            player.makeChoice("aaaaaaaaaa or bbbbbbbbbb?", ['aaaaaaaaaa', 'test'], ['bbbbbbbbbb', 'gusgus'])
+            player.makeChoice("You don't know me, but I know you. Say, am I not pretty?", ['Yes, you are.', 'win'], ['Who are you?', 'lose'])
         })
 
-        label('test', function() {
-            bg('./assets/img/bg3.jpg')
+        label('win', function() {
+            bg('./assets/img/2.jpg')
 
-            print('that is suspicious')
-            char.say("that is suspicious")
+            villain.say("Good. Very good. I am satisfied.", "./assets/sound/a2.mp3")
             
-            goto('a')
+            goto('end');
         })
 
-        label('a', function() {
-            bg('./assets/img/bg4.jpg')
+        label('lose', function() {
+            bg('./assets/img/3.jpg')
 
-            print('gus is sus')
-            gamer.say("gus is sus")
+            villain.say("No! No! That's now how the game is supposed to go. You are no fun.", "./assets/sound/a3.mp3")
             
-            player.makeChoice("1 or 2?", ['1', 'b'], ['2', 'test'])
+            goto('end');
         })
 
-        label('b', function() {
-            bg('./assets/img/bg5.jpg')
-
-            print('gus is not sus')
-            char.say("i am not sus")
-            
-            player.makeChoice("yes or no?", ['yes', 'paradise'], ['no', 'hell'])
-        })
-
-        label('paradise', function() {
-            bg('./assets/img/bg6.gif');
-
-            print('gustavo is happy to hear that', './assets/sound/sound1.mp3')
-            char.say('thanks, i like yo cut G');
-        })
-
-        label('hell', function() {
-            bg('./assets/img/bg7.gif');
-
-            print('gustavo was indeed the sus gus', './assets/sound/sound3.mp3')
-            char.say('I AM RED', './assets/sound/sound2.mp3');
+        label('end', function() {
+            bg('./assets/img/4.jpg')
+            print('...', "./assets/sound/a2.mp3")
         })
     </script>
 </body>
