@@ -8,13 +8,13 @@ function wrapQueue(callback) {
 }
 
 function wrapNext() {
-    if((engine.count < engine.labels[engine.currentLabel].length - 1) && (engine.labels[engine.currentLabel].length > 0)) {
+    if((engine.count < engine.labels[engine.currentLabel.name].length - 1) && (engine.labels[engine.currentLabel.name].length > 0)) {
         clearScene(true, false, true, true);
 
         const callback = function(map, key, index) {
             map[key][index][1]()
-            if(map[key][index][2]) {
-                map[key][index][2]()
+            if(map[key][index][3]) {
+                map[key][index][3]()
             }
             map[key][index][0]()
         }
@@ -24,14 +24,15 @@ function wrapNext() {
 }
 
 function wrapPrevious() {
-    if((engine.labels[engine.currentLabel].length > 0) && (engine.currentReturns > 0)) {
+    if((engine.labels[engine.currentLabel.name].length > 0) && (engine.currentReturns > 0)) {
         if(!document.getElementById('btn1')) {
-            clearScene(true, false, true, true);
 
             const callback = function(map, key, index) {
+                clearScene(true, false, true, true);
+
                 map[key][index][1]()
-                if(map[key][index][2]) {
-                    map[key][index][2]()
+                if(map[key][index][3]) {
+                    map[key][index][3]()
                 }
                 map[key][index][0]()
             }

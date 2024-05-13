@@ -1,25 +1,33 @@
+class Label {
+    constructor(pLabel, name) {
+        this.previousLabel = pLabel;
+        this.name = name;
+    }
+}
+
 class Engine {
     constructor() {
         this.labels = {};
-
         this.labelQueueName;
-        
         this.count = -1;
 
         this.currentLabel;
-        this.previousLabel;
-        this.currentBackground = "";
-        this.lastChoice = [];
+
+        this.currentBackground;
+        this.currentBackgroundMusic;
+        this.isCurrentBackgroundMusic = false;
         this.soundSaver = null;
 
-        this.maxReturns = 5;
+        this.lastChoice;
+
+        this.maxReturns = 10;
         this.currentReturns = this.maxReturns;
 
         this.gotoFlag = 0;
     }
 
     queue(callback) {
-        this.labels[this.labelQueueName].push([callback, this.currentBackground]);
+        this.labels[this.labelQueueName].push([callback, this.currentBackground, this.currentBackgroundMusic]);
 
         if(this.soundSaver != null) {
             this.labels[this.labelQueueName][this.labels[this.labelQueueName].length-1].push(this.soundSaver);
@@ -31,7 +39,10 @@ class Engine {
         this.count++;
 
         if(callback) {
-            callback(this.labels, this.currentLabel, this.count);
+            if(this.currentLabel.previousLabel == null && this.count == 1) {
+                this.labels[this.currentLabel.name][0][2]()
+            } 
+            callback(this.labels, this.currentLabel.name, this.count);
         }
     }
 
@@ -40,39 +51,38 @@ class Engine {
             this.count--;
 
             if(callback) {
-                callback(this.labels, this.currentLabel, this.count);
+                callback(this.labels, this.currentLabel.name, this.count);
                 
             }
 
             this.currentReturns--;
         } else {
-            if(this.previousLabel != 444) {
-                let temp = this.labels[this.previousLabel].length;
+            if(this.currentLabel.previousLabel != null) {
+                let temp = this.labels[this.currentLabel.previousLabel.name].length;
 
                 if(this.gotoFlag) {
                     temp --;
                 }
 
-                this._goto(this.previousLabel, temp);
+                this.count = temp;
+                this._goto(this.currentLabel.previousLabel.name, this.count, true);
                 wrapPrevious();
             }
         }
     }
 
     reset() {
-        if(this.lastChoice.length != 0) {
-            this._goto(this.lastChoice[0], this.lastChoice[1]);
-            wrapNext();
-        }
+        this._goto(this.lastChoice[0], this.lastChoice[1]);
+        wrapNext();
     }
 
     _label(name, callback) {
         if(!this.labels[name]) {
             this.labels[name] = [];
             this.labelQueueName = name;
-            if(!this.previousLabel) {
-                this.currentLabel = name;
-                this.previousLabel = 444;
+            if(!this.currentLabel) {
+                this.currentLabel = new Label(null, name);
+                this.lastChoice = [this.currentLabel.name, -1];
             }
             callback()
         } else {
@@ -80,10 +90,18 @@ class Engine {
         }
     }
 
-    _goto(label, countReset = -1) {
-        this.previousLabel = this.currentLabel;
-        this.currentLabel = label;
+    _goto(label, countReset = -1, isBack = false) {
+        clearScene(false, false, false, false, true);
+        
+        if(!isBack) {
+            this.currentLabel = new Label(this.currentLabel, label);
+        } else {
+            this.currentLabel = this.currentLabel.previousLabel;
+        }
+
         this.count = countReset;
+
+        this.labels[this.currentLabel.name][0][2]()
     }
 
     returns(num) {

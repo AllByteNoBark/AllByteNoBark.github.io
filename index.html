@@ -11,46 +11,46 @@
 
         const player = new Player("Protagonist");
         const villain = new Character("Mysterious Figure");
-        
+
         label('start', function() {
-            bg('./assets/img/0.jpg');
+            bg('0.jpg', 'a0.mp3');
             
-            print("...", "./assets/sound/a0.mp3");
-            player.say("It's very quiet today.", "./assets/sound/a0.mp3");
-            player.say("I can only hear the sound of rain. It's almost too relaxing.", "./assets/sound/a0.mp3")
+            print("...");
+            player.say("It's very quiet today.");
+            player.say("I can only hear the sound of rain. It's almost too relaxing.")
 
             goto('appearance');
         })
 
         label('appearance', function() {
-            bg('./assets/img/1.jpg');
+            bg('1.jpg', "a1.mp3");
 
-            print("...", "./assets/sound/a1.mp3")
-            print("What, or who, is that?", "./assets/sound/a1.mp3");
-            villain.say('Finally, I have found you.', "./assets/sound/a1.mp3")
+            print("...")
+            print("What, or who, is that?");
+            villain.say('Finally, I have found you.')
 
             player.makeChoice("You don't know me, but I know you. Say, am I not pretty?", ['Yes, you are.', 'win'], ['Who are you?', 'lose'])
         })
 
         label('win', function() {
-            bg('./assets/img/2.jpg')
+            bg('2.jpg', "a2.mp3")
 
-            villain.say("Good. Very good. I am satisfied.", "./assets/sound/a2.mp3")
+            villain.say("Good. Very good. I am satisfied.")
             
             goto('end');
         })
 
         label('lose', function() {
-            bg('./assets/img/3.jpg')
+            bg('3.jpg', "a2.mp3")
 
-            villain.say("No! No! That's now how the game is supposed to go. You are no fun.", "./assets/sound/a3.mp3")
+            villain.say("No! No! That's now how the game is supposed to go. You are no fun.", "a3.mp3")
             
             goto('end');
         })
 
         label('end', function() {
-            bg('./assets/img/4.jpg')
-            print('...', "./assets/sound/a2.mp3")
+            bg('4.jpg', "a2.mp3")
+            print('...')
         })
     </script>
 </body>

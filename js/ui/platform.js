@@ -79,7 +79,7 @@ document.getElementById("back2").addEventListener("click", () => {
     wrapReset();
 }, true);
 
-function clearScene(text = false, background = false, choices = false, audio = false) {
+function clearScene(text = false, background = false, choices = false, audio = false, bgmusic = false) {
     if(text) {
         if(document.getElementById('bT')) {
             document.getElementById('bT').remove();
@@ -101,28 +101,37 @@ function clearScene(text = false, background = false, choices = false, audio = f
             document.getElementById('audio').remove();
         }
     }
+    if(bgmusic) {
+        if(document.getElementById("bgMusic")) {
+            document.getElementById("bgMusic").remove();
+        }
+    }
 }
 
 function gameTitle(name) {
     document.getElementById('title').innerText = name;
 }
 
-function _sound(link) {
-    const audio = document.createElement('audio');
-    audio.autoplay = true;
-    audio.loop = true;
-    audio.src = link;
-    audio.id = 'audio';
-    document.body.appendChild(audio);
+function backgroundSound(link) {
+    engine.currentBackgroundMusic = () => {
+        const audio = document.createElement('audio');
+        audio.id = 'bgMusic';
+        audio.src = `./assets/sound/${link}`;
+        audio.type = "audio/mpeg"
+        audio.loop = true;
+        document.body.appendChild(audio);
+        audio.play();
+    }
 }
 
 function sound(link) {
     engine.soundSaver = () => {
         const audio = document.createElement('audio');
-        audio.autoplay = true;
-        audio.loop = true;
-        audio.src = link;
         audio.id = 'audio';
+        audio.src = `./assets/sound/${link}`;
+        audio.type = "audio/mpeg"
+        audio.loop = false;
         document.body.appendChild(audio);
+        audio.play();
     }
 }

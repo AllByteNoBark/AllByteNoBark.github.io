@@ -35,7 +35,7 @@ class Player {
             _print(choice);
             _newChoices(option1[0], option2[0]);
 
-            engine.lastChoice = [engine.currentLabel, engine.count-1];
+            engine.lastChoice = [engine.currentLabel.name, engine.count-1];
             engine.gotoFlag = false;
 
             document.getElementById('btn1').addEventListener("click", () => {   
