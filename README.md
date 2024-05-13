@@ -19,7 +19,7 @@ There are already images and audio files included inside the assets folder, and 
 
 ## Built With
 
-  - JavaScript and CSS only.
+  - JavaScript, HTML and CSS only.
 
 ## Author
 
