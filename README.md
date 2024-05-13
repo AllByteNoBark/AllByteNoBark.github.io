@@ -1,7 +1,7 @@
 # Visual Novel Engine
 
-Visual Novel Engine is a mainly JavaScript app that provides the necessary functions for anyone to easily create their own visual novel game.
-The project is far from finished but it already provides the functions needed to create a simple visual novel with simple features.
+The Visual Novel Engine is a JavaScript-based framework/library crafted with HTML and CSS, designed to empower users to effortlessly craft their own visual novel games. Its intuitive design makes it an ideal choice for all developers looking to delve into the world of interactive storytelling.
+While still a work in progress, it offers essential functionalities for creating simple visual novels with basic features. 
 
 ## Getting Started
 
